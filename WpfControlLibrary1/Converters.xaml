@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:local="clr-namespace:WpfControlLibrary1"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <local:ConverterBoolInvert x:Key="BoolInvert"/>
+    <local:ConverterBoolToVisibility x:Key="BoolToVis"/>
+    <local:ConverterBoolToVisibilityInvert x:Key="BoolToVisInvert"/>
+    <local:ConverterNullToVisibilityInvert x:Key="NotANullVisibility"/>
+
+</ResourceDictionary>

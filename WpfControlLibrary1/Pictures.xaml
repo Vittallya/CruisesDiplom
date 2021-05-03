@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <BitmapImage x:Key="LeftArrow" UriSource="Images/leftArrow.png"/>
+    <BitmapImage x:Key="Quotation" UriSource="Images/quotation.png"/>
+    <BitmapImage x:Key="Background" UriSource="Images/background.jpg"/>
+    <BitmapImage x:Key="user" UriSource="Images/user.png"/>
+    <BitmapImage x:Key="cruise" UriSource="Images/cruise.png"/>
+    
+    <BitmapImage x:Key="layner.jpg" UriSource="Images/layner.jpg"/>
+    <BitmapImage x:Key="layner1.jpg" UriSource="Images/layner1.jpg"/>
+    <BitmapImage x:Key="layner2.jpg" UriSource="Images/layner2.jpg"/>
+
+    <BitmapImage x:Key="turImage1.jpg" UriSource="Images/turImage1.jpg"/>
+    <BitmapImage x:Key="turImage2.jpg" UriSource="Images/turImage2.jpg"/>
+    <BitmapImage x:Key="turImage3.jpg" UriSource="Images/turImage3.jpg"/>
+        
+    
+
+</ResourceDictionary>

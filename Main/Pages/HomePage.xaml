@@ -1,0 +1,105 @@
+﻿<Page x:Class="Main.Pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Main.Pages"
+      mc:Ignorable="d" 
+      DataContext="{Binding Source={StaticResource Locator}, Path=HomeViewModel}"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePage">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="{DynamicResource Background}"/>
+        </Grid.Background>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <Border 
+            Visibility="{Binding IsAutorized, Converter={StaticResource BoolToVis}}"
+            BorderBrush="#7FFFFFFF"
+            Background="#7FFFFFFF"
+            BorderThickness="3"
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            Padding="15 2"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            VerticalAlignment="Top"
+            CornerRadius="3">
+
+            <StackPanel>
+                <Button 
+                    Style="{DynamicResource ButtonEmpty}">
+                    <Image Source="{DynamicResource user}" MaxHeight="55"/>
+                </Button>
+                
+                <TextBlock TextAlignment="Center" Margin="0 5" Text="{Binding User.Name}" Style="{DynamicResource TextBlock_H2}"/>
+                <Button 
+                    FontSize="16"
+                    Margin="0 5" Content="Выйти"
+                    Style="{DynamicResource ButtonEmpty}"
+                    Command="{Binding LogoutCommand}"/>
+            </StackPanel>
+        </Border>
+
+        <TextBlock Text="Круизы" 
+                   FontSize="72"
+                   Foreground="White"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Grid.Column="1" FontFamily="Candara"/>
+
+        <Border 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Padding="15 10 55 10"
+            CornerRadius="3"
+            BorderThickness="3"
+            Grid.Column="1" Grid.Row="1">
+
+            <StackPanel>
+                <Button Margin="0 9" 
+                        Command="{Binding ToTours}"
+                        FontSize="18"
+                        Padding="35 8" Content="Выбрать тур"/>
+                <Button Margin="0 9" 
+                        FontSize="18"
+                        Command="{Binding ToLayners}"
+                        Padding="35 8" Content="Наши куризные лайнеры"/>
+
+                <Button Margin="0 9" 
+                        FontSize="18"
+                        Visibility="{Binding IsAutorized, Converter={StaticResource BoolToVis}}"
+                        Command="{Binding ToProfileView}"
+                        Padding="35 8" Content="Мои заказы"/>
+                
+                <!--<Button Margin="0 9" 
+                        FontSize="18"
+                        Visibility="{Binding IsAutorized, Converter={StaticResource BoolToVis}}"
+                        Command="{Binding LogoutCommand}"
+                        Padding="35 8" Content="Выйти"/>-->
+                
+                <Button Margin="0 9" 
+                        FontSize="18"
+                        Visibility="{Binding IsAutorized, Converter={StaticResource BoolToVisInvert}}"
+                        Command="{Binding ToAutorize}"
+                        Padding="35 8" Content="Авторизация"/>
+                
+            </StackPanel>
+            
+        </Border>
+
+    </Grid>
+</Page>

@@ -1,0 +1,35 @@
+﻿<Window x:Class="Main.Windows.CruiseView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Main.Windows"
+        mc:Ignorable="d"
+        MouseUp="Canvas_MouseUp"
+        Title="CruiseView" Height="450" Width="800" MouseWheel="Window_MouseWheel">
+    <Grid>
+
+        <Canvas 
+            Cursor="ScrollAll"
+            Background="Red"
+            MouseDown="Canvas_MouseDown"
+            MouseUp="Canvas_MouseUp"
+            x:Name="canv"
+            MouseMove="Canvas_MouseMove">
+            <Image 
+                Canvas.Left="0"
+                Canvas.Top="0"
+                MaxWidth="{Binding ElementName=canv, Path=ActualWidth}"
+                x:Name="img" Source="{StaticResource layner.jpg }" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Canvas>
+    </Grid>
+</Window>
