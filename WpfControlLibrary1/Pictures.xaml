@@ -14,6 +14,11 @@
     <BitmapImage x:Key="turImage1.jpg" UriSource="Images/turImage1.jpg"/>
     <BitmapImage x:Key="turImage2.jpg" UriSource="Images/turImage2.jpg"/>
     <BitmapImage x:Key="turImage3.jpg" UriSource="Images/turImage3.jpg"/>
+    
+    <BitmapImage x:Key="c1.jpg" UriSource="Images/c1.jpg"/>
+    <BitmapImage x:Key="c2.jpg" UriSource="Images/c2.jpg"/>
+    <BitmapImage x:Key="c3.jpg" UriSource="Images/c3.jpg"/>
+    <BitmapImage x:Key="c4.jpg" UriSource="Images/c4.jpg"/>
         
     
 

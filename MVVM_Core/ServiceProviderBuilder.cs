@@ -19,6 +19,7 @@ namespace MVVM_Core
         {
             services.AddSingleton<PageService>();
             services.AddSingleton<EventBus>();
+            services.AddSingleton<WindowsService>();
 
             var types = FindTypesByBaseClass("BaseViewModel");
 

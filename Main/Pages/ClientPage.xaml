@@ -78,7 +78,7 @@
                                     <TextBlock 
                                     Margin="0 7"
                                     Style="{DynamicResource TextBlock_H3}">
-                                    <Run Text="Количество пассажиров:"/>
+                                    <Run Text="Общее количество пассажиров:"/>
                                     <Run FontWeight="DemiBold" Text="{Binding PeopleCount}"/>
                                 </TextBlock>
 
@@ -91,6 +91,7 @@
 
 
                                 <StackPanel 
+                                    Visibility="{Binding HasIns, Converter={StaticResource BoolToVis}}"
                                     Margin="0 7">
                                     <TextBlock Style="{DynamicResource TextBlock_H3}" Text="Включенная страховка:"/>
 
@@ -102,8 +103,8 @@
                                             <DataTemplate>
                                                 <StackPanel Margin="0 7" Orientation="Horizontal">
                                                     <TextBlock Width="250" Text="{Binding Name}" Style="{DynamicResource TextBlock_H4}"/>
-                                                    <TextBlock Width="80" Text="{Binding Cost, StringFormat=\{0:N\} р.}" Style="{DynamicResource TextBlock_H4}"/>
-                                                    <TextBlock Width="80" Text="{Binding CostUSD, StringFormat=\{0:C\}}" Style="{DynamicResource TextBlock_H4}"/>
+                                                    <TextBlock Width="80" Text="{Binding Cost, StringFormat=\{0:N\} р.|}" Style="{DynamicResource TextBlock_H4}"/>
+                                                    <TextBlock Width="80" Text="{Binding CostUSD, StringFormat=\{0:C\}|}" Style="{DynamicResource TextBlock_H4}"/>
                                                     <TextBlock Width="100" Text="{Binding CostEUR, StringFormat=\€\{0:N\}}" Style="{DynamicResource TextBlock_H4}"/>
                                                 </StackPanel>
                                             </DataTemplate>
@@ -116,7 +117,9 @@
                                     Margin="0 7"
                                     Style="{DynamicResource TextBlock_H3}">
                                         <Run Text="Общая стоимость:"/>
-                                        <Run FontWeight="DemiBold" Text="{Binding FullCost, StringFormat=\{0:N\} р.}"/>
+                                        <Run FontWeight="DemiBold" Text="{Binding FullCost, StringFormat=\{0:N\} р.|}"/>
+                                        <Run FontWeight="DemiBold" Text="{Binding FullCostUSD, StringFormat=\{0:C\}|}"/>
+                                        <Run FontWeight="DemiBold" Text="{Binding FullCostEUR, StringFormat=\€\{0:N\}}"/>
 
 
                                     </TextBlock>

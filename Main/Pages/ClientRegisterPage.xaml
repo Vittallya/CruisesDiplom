@@ -100,10 +100,10 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Padding="45 7"
-                Content="Оформить заказ"
+                Content="Продолжить"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
-                Command="{Binding NextCommand}"/>
+                Command="{Binding NextCommand}" Click="Button_Click"/>
 
     </Grid>
 </Page>

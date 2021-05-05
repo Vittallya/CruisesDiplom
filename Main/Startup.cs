@@ -32,6 +32,7 @@ namespace Main
             services.AddTransient<WordService>();
             services.AddSingleton<ValuteGetterService>();
             services.AddSingleton<Services.PassengersService>();
+            services.AddSingleton<PlacementService>();
             services.AddTransient<IConfiguration>(x => (new ConfigurationBuilder().
                         AddInMemoryCollection(new Dictionary<string, string>() 
                         {

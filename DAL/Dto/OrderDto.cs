@@ -12,9 +12,12 @@ namespace DAL.Dto
     {
         public int Id { get; set; }
         public int ClientId { get; set; }
+        public ClientDto ClientDto { get; set; }
         public int TourId { get; set; }
 
         public double FullCost { get; set; }
+        public double FullCostUSD { get; set; }
+        public double FullCostEUR { get; set; }
 
         public DateTimeOffset CreationDate { get; set; }
         public int PeopleCount { get; set; }
@@ -23,6 +26,7 @@ namespace DAL.Dto
 
         public TourDto TourDto { get; set; }
         public ICollection<InsuranceDto> InsuranceDtos { get; set; }
+        public ICollection<PlacementDto> PlacementDtos { get; set; }
 
         public bool HasIns => InsuranceDtos != null && InsuranceDtos.Count > 0;
     }

@@ -23,7 +23,7 @@ namespace DAL.Dto
         public bool IsChild { get; set; }
         public bool IsChildBefore14 { get; set; }
 
-        public int CabinNumber { get; set; }
+        public int CabinId { get; set; }
         public CabinDto CabinDto { get; set; }
     }
 }

@@ -10,24 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Main.Pages
+namespace Main.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для ClientRegisterPage.xaml
+    /// Логика взаимодействия для CabinsWindow.xaml
     /// </summary>
-    public partial class ClientRegisterPage : Page
+    public partial class CabinsWindow : Window
     {
-        public ClientRegisterPage()
+        public CabinsWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

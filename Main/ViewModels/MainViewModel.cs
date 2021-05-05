@@ -112,6 +112,10 @@ namespace Main.ViewModels
                     App.Current.MainWindow.FindResource("turImage1.jpg") as BitmapImage,
                     App.Current.MainWindow.FindResource("turImage2.jpg") as BitmapImage,
                     App.Current.MainWindow.FindResource("turImage3.jpg") as BitmapImage,
+                    App.Current.MainWindow.FindResource("c1.jpg") as BitmapImage,
+                    App.Current.MainWindow.FindResource("c2.jpg") as BitmapImage,
+                    App.Current.MainWindow.FindResource("c3.jpg") as BitmapImage,
+                    App.Current.MainWindow.FindResource("c4.jpg") as BitmapImage,
                 };
                 Directory.CreateDirectory(path);
 
@@ -153,7 +157,7 @@ namespace Main.ViewModels
             pipeHanlder.Init("CruisesPipe");
             pipeHanlder.UpdateCalled += PipeHanlder_UpdateCalled;
 
-            await Task.Run(() => ImagesCopy());
+            ImagesCopy();
             await ContractCopy();
             
             IsLoaded = await contextLoader.LoadAsync<Layner>();

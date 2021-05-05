@@ -71,12 +71,18 @@ namespace BL
         }
 
         private IEnumerable<InsuranceDto> _insurancesDto;
+        private IEnumerable<PlacementDto> _placementsDto;
 
         public bool HasInsurances => _insurancesDto != null && _insurancesDto.Count() > 0;
 
         public void SetupInsurances(IEnumerable<InsuranceDto> ins)
         {
             _insurancesDto = ins;
+        }
+
+        public void SetupPlacements(IEnumerable<PlacementDto> placements)
+        {
+            _placementsDto = placements;
         }
 
 
@@ -86,12 +92,14 @@ namespace BL
 
             
             _currentOrder.TourId = _tourId;
-            
+
             if (!IsEdit)
             {
                 _currentOrder.CreationDate = DateTimeOffset.Now;
                 _currentOrder.OrderStatus = OrderStatus.Active;
                 _currentOrder.ClientId = _clientId;
+
+                
 
                 if (HasInsurances)
                 {
@@ -104,7 +112,15 @@ namespace BL
                         i.Orders.Add(_currentOrder);
                     }
                 }
+                var placements = _placementsDto.Select(x =>
+                {
+                    var inst = mapper.MapTo<PlacementDto, Placement>(x);
+                    inst.Order = _currentOrder;
+                    return inst;
+                });
+
                 dbContext.Orders.Add(_currentOrder);
+                dbContext.Placements.AddRange(placements);
             }
             else
             {
@@ -144,12 +160,15 @@ namespace BL
             {
                 await dbContext.Entry(order).Collection(x => x.Insurances).LoadAsync();
                 await dbContext.Entry(order).Reference(x => x.Tour).LoadAsync();
+                await dbContext.Entry(order).Reference(x => x.Client).LoadAsync();
             }
 
             return list.Select(y =>
             {
                 var inst = mapper.MapTo<Order, OrderDto>(y);
-
+                inst.ClientDto = mapper.MapTo<Client, ClientDto>(y.Client);
+                inst.FullCostEUR = valuteGetter.GetEuroValue(y.FullCost);
+                inst.FullCostUSD = valuteGetter.GetUSDValue(y.FullCost);
                 inst.InsuranceDtos = y.Insurances.Select(x => 
                 {
                     var dto = mapper.MapTo<Insurance, InsuranceDto>(x);
@@ -166,6 +185,25 @@ namespace BL
             });
         }
 
+
+        public async Task<IEnumerable<PlacementDto>> GetPlacements(int orderId)
+        {
+            await dbContext.Placements.Include(x => x.Cabin).LoadAsync();
+
+            var list = await dbContext.Placements.Where(x => x.OrderId == orderId).ToListAsync();
+
+            foreach(var pl in list)
+            {
+                await dbContext.Entry(pl).Reference(x => x.Cabin).LoadAsync();
+            }
+
+            return list.Select(x => 
+            {
+                var dto = mapper.MapTo<Placement, PlacementDto>(x);
+                dto.CabinDto = mapper.MapTo<Cabin, CabinDto>(x.Cabin);
+                return dto;
+            });
+        }
 
         public async Task<OrderDto> CancelOrder(int orderId)
         {

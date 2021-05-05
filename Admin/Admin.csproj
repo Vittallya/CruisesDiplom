@@ -186,7 +186,7 @@
       <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\MVVM_Core\MVVM_Core.csproj">
-      <Project>{e2dd1f52-cc8d-4bea-ab48-7959ec923f2b}</Project>
+      <Project>{E2DD1F52-CC8D-4BEA-AB48-7959EC923F2B}</Project>
       <Name>MVVM_Core</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Users\VIT\Downloads\Cruises-master\Cruises-master\WpfControlLibrary1\WpfControlLibrary1.csproj">

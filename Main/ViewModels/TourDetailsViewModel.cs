@@ -58,7 +58,7 @@ namespace Main.ViewModels
             splashScreen.OnOverlapScreen("Получение акутального курса валют...");
 
             bool res = await valuteGetter.ReloadAsync();
-            await Task.Delay(950);
+            await Task.Delay(250);
 
             if (res)
             {

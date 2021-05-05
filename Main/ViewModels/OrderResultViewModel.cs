@@ -86,17 +86,6 @@ namespace Main.ViewModels
             pageservice.ChangePage<Pages.HomePage>(PoolIndex, DisappearAnimation.Default);
         }
 
-        protected override void Back(object param)
-        {
-            if (userService.IsAutorized)
-            {
-                pageservice.Back<Pages.OrderDataPage>(PoolIndex, DisappearAnimation.Default);
-            }
-            else
-            {
-                pageservice.Back<Pages.ClientRegisterPage>(PoolIndex, DisappearAnimation.Default);
-            }
-        }
         public override int PoolIndex => Rules.Pages.MainPool;
     }
 }

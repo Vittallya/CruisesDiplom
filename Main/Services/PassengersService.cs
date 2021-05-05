@@ -10,14 +10,21 @@ namespace Main.Services
     public class PassengersService
     {
         private IEnumerable<Passenger> _passengers;
+        private IEnumerable<Passenger> _oPassengers;
 
-        public void SetupPassengers(IEnumerable<Passenger> passengers)
+        public void SetupPassengers(IEnumerable<Passenger> selected, IEnumerable<Passenger> otherPassengers)
         {
-            _passengers = passengers;
+            _passengers = selected;
+            _oPassengers = otherPassengers;
         }
+
         public IEnumerable<Passenger> GetPassengers()
         {
             return _passengers;
+        }
+        public IEnumerable<Passenger> GetOtherPassengers()
+        {
+            return _oPassengers;
         }
     }
 }

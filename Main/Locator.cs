@@ -28,6 +28,7 @@ namespace Main
         public  ViewModels.ToursViewModel ToursViewModel => Services.GetRequiredService<ToursViewModel>();
         public  ViewModels.TourDetailsViewModel TourDetailsViewModel => Services.GetRequiredService<TourDetailsViewModel>();
         public  ViewModels.PlacementViewModel PlacementViewModel => Services.GetRequiredService<PlacementViewModel>();
+        public  ViewModels.CabinsViewModel CabinsViewModel => Services.GetRequiredService<CabinsViewModel>();
     }
 }
 

@@ -25,4 +25,17 @@ namespace Main.Components
 
         public bool _IsSelected { get; set; }
     }
+
+    public class PassComparer : IEqualityComparer<Passenger>
+    {
+        public bool Equals(Passenger x, Passenger y)
+        {
+            return x.Number == y.Number && x.IsChild == y.IsChild;
+        }
+
+        public int GetHashCode(Passenger obj)
+        {
+            return obj.Number;
+        }
+    }
 }

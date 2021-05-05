@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,16 +30,35 @@ namespace BL
             this.map = mapperService;
         }
 
-        public async Task ReloadAsync()
+        public async Task ReloadAsync(int tourId, string defImgPath)
         {
+            //Todo: вычесть из числа кают те, что занятые
             await allDbContext.Cabins.LoadAsync();
             await allDbContext.Placements.LoadAsync();
 
-            _placements = await allDbContext.Placements.AsNoTracking().ToListAsync();
+            _placements = await allDbContext.Placements.SqlQuery("SELECT * FROM [Placements] " +
+                "WHERE [OrderId] IN (SELECT [Id] FROM [Orders] WHERE [TourId] = @tId)", 
+                new SqlParameter("@tId", tourId)).AsNoTracking().
+                ToListAsync();
+
             _cabins = await allDbContext.Cabins.AsNoTracking().ToListAsync();
 
-            _placementsDto = _placements.Select(x => map.MapTo<Placement, PlacementDto>(x)).ToList();
-            _cabinsDto = _cabins.Select(x => map.MapTo<Cabin, CabinDto>(x)).ToList();
+
+
+            _placementsDto = _placements.Select(x => 
+            {
+                var dto = map.MapTo<Placement, PlacementDto>(x);
+                return dto;
+            }).ToList();
+
+            _cabinsDto = _cabins.Select(x => 
+            {
+                var dto = map.MapTo<Cabin, CabinDto>(x);
+                string name = $"c{(int)dto.CabinType + 1}.jpg";
+                dto.ImagePath = Path.Combine(defImgPath, name);
+                return dto;
+
+            }).ToList();
         }
 
         public IEnumerable<PlacementDto> GetAllPlacements()
@@ -46,10 +67,14 @@ namespace BL
         }
         public IEnumerable<CabinDto> GetCabins(int laynerId, int asults, int childs)
         {
+            var busyCabins = _placementsDto.Select(x => x.CabinId);
+
             return _cabinsDto.
-                Where(x => x.LaynerId == laynerId && 
-                x.AdultCount >= asults && 
-                x.ChildCount >= childs);
+                Where(x => 
+                //x.LaynerId == laynerId && 
+                x.AdultCount == asults && 
+                !busyCabins.Contains(x.Id) &&
+                x.ChildCount == childs);
         }
     }
 }

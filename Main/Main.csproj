@@ -84,6 +84,10 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.5.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="MVVM_Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\MVVM_Core\bin\Debug\MVVM_Core.dll</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged, Version=3.3.2.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.3.3.2\lib\net40\PropertyChanged.dll</HintPath>
     </Reference>
@@ -188,6 +192,9 @@
     <Compile Include="ViewModels\TourDetailsViewModel.cs" />
     <Compile Include="ViewModels\ToursViewModel.cs" />
     <Compile Include="ViewModels\UserHomeViewModel.cs" />
+    <Compile Include="Windows\CabinsWindow.xaml.cs">
+      <DependentUpon>CabinsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\CruiseView.xaml.cs">
       <DependentUpon>CruiseView.xaml</DependentUpon>
     </Compile>
@@ -260,6 +267,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\CabinsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\CruiseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -313,10 +324,6 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{1122897e-3df2-4e7a-bc2a-233b007df0ec}</Project>
       <Name>DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MVVM_Core\MVVM_Core.csproj">
-      <Project>{e2dd1f52-cc8d-4bea-ab48-7959ec923f2b}</Project>
-      <Name>MVVM_Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\WpfControlLibrary1\WpfControlLibrary1.csproj">
       <Project>{43d571cc-c97f-4bb7-bde2-321ff6b60260}</Project>

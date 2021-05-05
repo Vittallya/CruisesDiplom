@@ -69,8 +69,8 @@
                     Margin="0 7"
                     Style="{DynamicResource TextBlock_H3}">
                     <Run Text="Общая стоимость:"/>
-                    <Run FontWeight="DemiBold" Text="{Binding OrderDto.FullCost, StringFormat=\{0:N\} р.}"/>
-                    <Run FontWeight="DemiBold" Text="{Binding CostUSD, Mode=OneWay, StringFormat=\{0:C\}}"/>
+                    <Run FontWeight="DemiBold" Text="{Binding OrderDto.FullCost, StringFormat=\{0:N\} р.|}"/>
+                    <Run FontWeight="DemiBold" Text="{Binding CostUSD, Mode=OneWay, StringFormat=\{0:C\}|}"/>
                     <Run FontWeight="DemiBold" Text="{Binding CostEuro, Mode=OneWay, StringFormat=\€\{0:N\}}"/>
                 </TextBlock>
 

@@ -27,6 +27,7 @@ namespace DAL.Models
         public OrderStatus OrderStatus { get; set; }
 
         public ICollection<Insurance> Insurances { get; set; }
+        public ICollection<Placement> Placements { get; set; }
 
     }
 }

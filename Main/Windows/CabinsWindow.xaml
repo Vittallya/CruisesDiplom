@@ -1,0 +1,94 @@
+﻿<Window x:Class="Main.Windows.CabinsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Main.Windows"
+        mc:Ignorable="d"
+        DataContext="{Binding Source={StaticResource Locator}, Path=CabinsViewModel}"
+        Title="Выбор каюты" Height="450" Width="800">
+    <Grid>
+        <ScrollViewer
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ItemsControl 
+                ItemsSource="{Binding Cabins}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Margin="55 15"
+                            HorizontalAlignment="Center"
+                            Background="LightSkyBlue" 
+                            BorderBrush="LightGray" 
+                            Padding="25 10"
+                            BorderThickness="3" 
+                            CornerRadius="3">
+
+                                <Grid >
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                    
+                                    <StackPanel Grid.Column="0" HorizontalAlignment="Left">
+                                        <TextBlock Style="{DynamicResource TextBlock_H2}">
+                                        <Run Text="Каюта № "/>
+                                        <Run Text="{Binding Id}"/>
+                                        </TextBlock>
+
+                                        <TextBlock Margin="0 8 0 0" Style="{DynamicResource TextBlock_H3}">
+                                        <Run Text="Палуба: "/>
+                                        <Run FontWeight="Bold" Text="{Binding Deck}"/>
+                                        </TextBlock>
+
+                                        <TextBlock Margin="0 8 0 0" Style="{DynamicResource TextBlock_H3}">
+                                        <Run Text="Взрослых: "/>
+                                        <Run FontWeight="Bold" Text="{Binding AdultCount}"/>
+                                        </TextBlock>
+
+                                        <TextBlock Margin="0 8 0 0" Style="{DynamicResource TextBlock_H3}">
+                                        <Run Text="Детей: "/>
+                                        <Run FontWeight="Bold" Text="{Binding ChildCount}"/>
+                                        </TextBlock>
+
+                                        <TextBlock Margin="0 8 0 0" Style="{DynamicResource TextBlock_H3}">
+                                        <Run Text="Класс: "/>
+                                        <Run FontWeight="Bold" Text="{Binding CabinType}"/>
+                                        </TextBlock>
+
+
+
+                                    </StackPanel>
+
+                                    <Image 
+                                        VerticalAlignment="Top"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="2"
+                                        Source="{Binding ImagePath}"
+                                        Width="350"/>
+
+                                <Button Content="Выбрать" 
+                                        FontSize="16"
+                                        VerticalAlignment="Top"
+                                        Margin="0 10"
+                                        DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext}"
+                                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}, Path=DataContext}"
+                                        Command="{Binding SelectCommand}"
+                                        Grid.Row="1"
+                                        Padding="45 7"/>
+
+                            </Grid>
+                            </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

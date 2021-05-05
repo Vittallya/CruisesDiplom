@@ -110,13 +110,9 @@
     <Compile Include="Migrations\202105011849034_Hz.designer.cs">
       <DependentUpon>202105011849034_Hz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105031812290_cabins.cs" />
-    <Compile Include="Migrations\202105031812290_cabins.designer.cs">
-      <DependentUpon>202105031812290_cabins.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105031915516_pasport.cs" />
-    <Compile Include="Migrations\202105031915516_pasport.designer.cs">
-      <DependentUpon>202105031915516_pasport.cs</DependentUpon>
+    <Compile Include="Migrations\202105050906232_cabinsPlacements.cs" />
+    <Compile Include="Migrations\202105050906232_cabinsPlacements.designer.cs">
+      <DependentUpon>202105050906232_cabinsPlacements.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Client.cs" />
@@ -170,11 +166,8 @@
     <EmbeddedResource Include="Migrations\202105011849034_Hz.resx">
       <DependentUpon>202105011849034_Hz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105031812290_cabins.resx">
-      <DependentUpon>202105031812290_cabins.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105031915516_pasport.resx">
-      <DependentUpon>202105031915516_pasport.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105050906232_cabinsPlacements.resx">
+      <DependentUpon>202105050906232_cabinsPlacements.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

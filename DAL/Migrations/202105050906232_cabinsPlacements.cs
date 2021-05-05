@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class cabins : DbMigration
+    public partial class cabinsPlacements : DbMigration
     {
         public override void Up()
         {
@@ -31,15 +31,16 @@
                         IsClient = c.Boolean(nullable: false),
                         Fio = c.String(),
                         Pasport = c.String(),
+                        BirthDoc = c.String(),
+                        IsChild = c.Boolean(nullable: false),
+                        IsChildBefore14 = c.Boolean(nullable: false),
                         CabinId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cabins", t => t.CabinId)
                 .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
                 .Index(t => t.OrderId)
-                .Index(t => t.CabinId);
-            
-            AddColumn("dbo.Clients", "Pasport", c => c.String());
+                .Index(t => t.CabinId);            
         }
         
         public override void Down()
@@ -50,7 +51,6 @@
             DropIndex("dbo.Placements", new[] { "CabinId" });
             DropIndex("dbo.Placements", new[] { "OrderId" });
             DropIndex("dbo.Cabins", new[] { "LaynerId" });
-            DropColumn("dbo.Clients", "Pasport");
             DropTable("dbo.Placements");
             DropTable("dbo.Cabins");
         }

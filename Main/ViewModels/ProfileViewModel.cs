@@ -1,8 +1,11 @@
 ﻿using BL;
 using DAL.Dto;
+using Main.Services;
 using Microsoft.Extensions.Configuration;
 using MVVM_Core;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -12,6 +15,7 @@ namespace Main.ViewModels
     {
         private readonly ValuteGetterService valuteGetter;
         private readonly WordService wordService;
+        private readonly SplashScreenService splashScreen;
         private readonly IConfiguration config;
         private readonly UserService userService;
         private readonly OrderService orderService;
@@ -46,11 +50,13 @@ namespace Main.ViewModels
         public ProfileViewModel(PageService pageservice,
             ValuteGetterService valuteGetter,
             WordService wordService,
+            SplashScreenService splashScreen,
             IConfiguration config,
             UserService userService, OrderService orderService) : base(pageservice)
         {
             this.valuteGetter = valuteGetter;
             this.wordService = wordService;
+            this.splashScreen = splashScreen;
             this.config = config;
             this.userService = userService;
             this.orderService = orderService;
@@ -59,6 +65,20 @@ namespace Main.ViewModels
 
         async void Init()
         {
+            splashScreen.OnOverlapScreen("Получение акутального курса валют...");
+
+            bool res = await valuteGetter.ReloadAsync();
+            await Task.Delay(250);
+
+            if (res)
+            {
+                splashScreen.OnClearScreen();
+            }
+            else
+            {
+                splashScreen.OnShowPromtBtn(valuteGetter.Message);
+            }
+
             Orders = new ObservableCollection<OrderDto>(await orderService.GetAllOrders(userService.CurrentUser.Id, valuteGetter));
         }
 
@@ -71,10 +91,12 @@ namespace Main.ViewModels
             }
         });
 
-        public ICommand ShowContract => new Command(x =>
+        public ICommand ShowContract => new CommandAsync(async x =>
         {
             if(x is OrderDto dto)
             {
+                dto.PlacementDtos = (await orderService.GetPlacements(dto.Id)).ToList();
+
                 wordService.ShowOrderContract(dto, valuteGetter, config["WordFile"]);
             }
         });

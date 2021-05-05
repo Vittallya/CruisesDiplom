@@ -174,6 +174,8 @@ namespace Main.ViewModels
             orderService.SetupFilledOrder(OrderDto);
             orderService.SetupInsurances(UsedIns);
 
+            //pageservice.ChangePage<Pages.PlacementPage>(PoolIndex, DisappearAnimation.Default);
+
             if (userService.IsAutorized)
             {
                 orderService.SetupClient(userService.CurrentUser.Id);

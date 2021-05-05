@@ -10,21 +10,12 @@ namespace DAL.Models
 {
     public enum CabinType
     {
-        Place_1,
-        Place_1_IncludeChild,
-        Place_2,
-        Place_2_IncludeChild,
-        Place_3,
-        Place_3_IncludeChild,
-        Place_4,
-        Place_4_IncludeChild,
+        A, B, C, D
     }
 
     public class Cabin
     {
-        [Key]
-        [Column("Id", Order = 1)]
-        public int Number { get; set; }
+        public int Id { get; set; }
 
         //[Key]
         //[Column( Order = 2)]

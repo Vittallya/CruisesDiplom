@@ -9,7 +9,7 @@ namespace DAL.Dto
 {
     public class CabinDto
     {
-        public int Number { get; set; }
+        public int Id { get; set; }
 
         //[Key]
         //[Column( Order = 2)]
@@ -23,5 +23,7 @@ namespace DAL.Dto
 
         public int AdultCount { get; set; }
         public int ChildCount { get; set; }
+
+        public string ImagePath { get; set; }
     }
 }
