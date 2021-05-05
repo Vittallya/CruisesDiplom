@@ -11,7 +11,7 @@
                 "dbo.Cabins",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false),
                         Deck = c.Int(nullable: false),
                         LaynerId = c.Int(nullable: false),
                         CabinType = c.Int(nullable: false),

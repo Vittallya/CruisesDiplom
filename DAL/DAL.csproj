@@ -90,10 +90,6 @@
     <Compile Include="Migrations\202104111414521_start2.designer.cs">
       <DependentUpon>202104111414521_start2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202104130813181_fillDb.cs" />
-    <Compile Include="Migrations\202104130813181_fillDb.designer.cs">
-      <DependentUpon>202104130813181_fillDb.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202104262001010_diplom1.cs" />
     <Compile Include="Migrations\202104262001010_diplom1.designer.cs">
       <DependentUpon>202104262001010_diplom1.cs</DependentUpon>
@@ -114,6 +110,10 @@
     <Compile Include="Migrations\202105050906232_cabinsPlacements.designer.cs">
       <DependentUpon>202105050906232_cabinsPlacements.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105051106313_seed.cs" />
+    <Compile Include="Migrations\202105051106313_seed.designer.cs">
+      <DependentUpon>202105051106313_seed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Insurance.cs" />
@@ -124,6 +124,11 @@
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Tour.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -151,9 +156,6 @@
     <EmbeddedResource Include="Migrations\202104111414521_start2.resx">
       <DependentUpon>202104111414521_start2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202104130813181_fillDb.resx">
-      <DependentUpon>202104130813181_fillDb.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104262001010_diplom1.resx">
       <DependentUpon>202104262001010_diplom1.cs</DependentUpon>
     </EmbeddedResource>
@@ -169,6 +171,16 @@
     <EmbeddedResource Include="Migrations\202105050906232_cabinsPlacements.resx">
       <DependentUpon>202105050906232_cabinsPlacements.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105051106313_seed.resx">
+      <DependentUpon>202105051106313_seed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seed.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

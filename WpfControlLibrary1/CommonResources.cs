@@ -9,5 +9,6 @@ namespace WpfControlLibrary1
     public class CommonResources
     {
         public static byte[] ContractDocument => Properties.Resources.obrazec;
+        public static string SqlFile => Properties.Resources.seed;
     }
 }

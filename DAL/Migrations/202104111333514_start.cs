@@ -15,6 +15,7 @@
                         Name = c.String(),
                         Email = c.String(),
                         Phone = c.String(),
+                        Pasport = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             

@@ -27,15 +27,18 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Grid.Column="0"/>
-
-
-        <ItemsControl 
-            HorizontalAlignment="Center"
-            Focusable="False"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        <ScrollViewer
             Grid.Row="1" 
             Grid.Column="0"
             Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+
+            <ItemsControl 
+            Focusable="False"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
             ItemsSource="{Binding Tours, UpdateSourceTrigger=PropertyChanged}">
 
             <ItemsControl.ItemsPanel>
@@ -79,7 +82,7 @@
             </ItemsControl.ItemTemplate>
 
         </ItemsControl>
-
+        </ScrollViewer>
         <Button Content="На главную" Grid.Column="0"
                 Grid.ColumnSpan="2"
                 FontSize="16"
