@@ -15,15 +15,9 @@ namespace BL
         private readonly AllDbContext dbContext;
         private readonly MapperService mapperService;
         private readonly UserService userService;
-
         public bool IsEdit { get; private set; }
-
         
         public string ErrorMessage { get; private set; }
-
-        /// <summary>
-        /// Свойство, говорящее о том, необходимо ли пользователю вводить логин и пароль. (Это свойсвтво само сбросится после его прочтения)
-        /// </summary>
         public bool IsRegisterRequiered 
         {
             get 
@@ -38,39 +32,33 @@ namespace BL
         private Client _client;
         private Profile _profile;
         private bool isRegisterRequiered;
-
         public void Clear()
         {
             _client =null;
             _profile =null;
             isRegisterRequiered = false;
         }
-
         public RegisterService(AllDbContext dbContext, MapperService mapperService, UserService userService)
         {
             this.dbContext = dbContext;
             this.mapperService = mapperService;
             this.userService = userService;
         }
-
         public async Task StartEditClient(int clientId)
         {
             await dbContext.Clients.LoadAsync();
             IsEdit = true;
             _client = await dbContext.Clients.FindAsync(clientId);
         }
-
         public ClientDto GetClient()
         {
             return _client != null ? mapperService.MapTo<Client, ClientDto>(_client) : new ClientDto();
         }
-
         public void SetupClient(ClientDto dto)
         {
             _client = mapperService.MapTo<ClientDto, Client>(dto);
 
         }
-
         public async Task<bool> SetupProfile(ProfileDto profileDto)
         {
             await dbContext.Profiles.LoadAsync();
@@ -97,8 +85,6 @@ namespace BL
 
             return true;
         }
-
-
         public async Task<(bool, int)> RegisterAsync()
         {
             

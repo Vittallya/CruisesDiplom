@@ -39,6 +39,12 @@ namespace Admin.ViewModels
             Items = new ObservableCollection<Tour>(dbContext.Set<Tour>());
         }
 
+        protected override void OnSetDefaults(Tour item)
+        {
+            item.StartDate = DateTime.Now.AddDays(1);
+            
+        }
+
         protected override async void OnPropertiesBuild(PropertiesBuilder<Tour> propertiesBuilder)
         {
             List<Layner> layners;
@@ -56,6 +62,8 @@ namespace Admin.ViewModels
             propertiesBuilder.AddValueTypeProperty(x => x.Cost, "Стоимость (р.)",
                 y => y.MoreEquialThan(0));
 
+            propertiesBuilder.AddStringProperty(x => x.Desctiprion, "Описание тура", y => y.NotNull()).UseControl(new TextBox { TextWrapping = System.Windows.TextWrapping.Wrap });
+
             propertiesBuilder.AddValueTypeProperty(x => x.ChildCost, "Стоимость за ребенка (р.)", 
                 y => y.MoreEquialThan(0));
 
@@ -64,7 +72,7 @@ namespace Admin.ViewModels
 
 
             propertiesBuilder.AddValueTypeProperty(x => x.LaynerId, "Лайнер",
-                y => y.MoreEquialThan(0)).UseCombobox<ComboBox, Layner>(layners, x => x.Id, x => x.Name);
+                y => y.MoreThan(0, "Лайнер должен быть выбран")).UseCombobox<ComboBox, Layner>(layners, x => x.Id, x => x.Name);
 
             propertiesBuilder.AddValueTypeProperty(x => x.DaysCount, "Кол-во дней",
                 y => y.MoreEquialThan(1));

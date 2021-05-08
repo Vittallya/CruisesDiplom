@@ -23,26 +23,22 @@ namespace BL
         }
 
         public ClientDto CurrentUser { get; private set; }
-
         public bool IsAutorized { get; private set; }
 
         public event Action<ClientDto> Autorized;
         public event Action Exited;
-
         public void Logout()
         {
             CurrentUser = null;
             IsAutorized = false;
             Exited?.Invoke();
         }
-
         public void SetupUser(ClientDto user)
         {
             CurrentUser = user;
             IsAutorized = true;
             Autorized?.Invoke(user);
-        }
-        
+        }        
         public async Task<ProfileDto> GetProfile()
         {
             if (!IsAutorized)

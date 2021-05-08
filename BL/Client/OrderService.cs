@@ -20,30 +20,26 @@ namespace BL
         private Order _currentOrder;
         private int _clientId;
         private int _tourId;
-
         public bool IsEdit { get; private set; }
         public bool IsStarted { get; private set; }
-
         public void Clear()
         {
             IsEdit = false;
             IsStarted = false;
             _currentOrder = null;
             _insurancesDto = null;
+            _placementsDto = null;
         }
-
         public OrderService(AllDbContext dbContext, MapperService mapperService, InsurancesService insurancesService)
         {
             this.dbContext = dbContext;
             this.mapper = mapperService;
             this.insurancesService = insurancesService;
         }
-
         public void SetupClient(int clientId)
         {
             _clientId = clientId;
         }
-
         public async Task StartEditOrder(int orderId)
         {
             IsEdit = true;
@@ -51,41 +47,31 @@ namespace BL
             await dbContext.Orders.LoadAsync();
             _currentOrder = await dbContext.Orders.FindAsync(orderId);
         }
-
         public void SetupTour(int tourId)
         {
             _tourId = tourId;
         }
-
         public OrderDto GetOrder()
         {
             return _currentOrder != null ? mapper.MapTo<Order, OrderDto>(_currentOrder) : 
                 new OrderDto() {  OrderStatus = OrderStatus.Active};
         }
-
         public int TourId => _tourId;
-
         public void SetupFilledOrder(OrderDto order)
         {
             _currentOrder = mapper.MapTo<OrderDto, Order>(order);
         }
-
         private IEnumerable<InsuranceDto> _insurancesDto;
         private IEnumerable<PlacementDto> _placementsDto;
-
         public bool HasInsurances => _insurancesDto != null && _insurancesDto.Count() > 0;
-
         public void SetupInsurances(IEnumerable<InsuranceDto> ins)
         {
             _insurancesDto = ins;
         }
-
         public void SetupPlacements(IEnumerable<PlacementDto> placements)
         {
             _placementsDto = placements;
         }
-
-
         public async Task<bool> ApplyOrder()
         {
             await dbContext.Tours.LoadAsync();
@@ -139,14 +125,11 @@ namespace BL
 
             return true;
         }
-
         public IEnumerable<InsuranceDto> GetUsedInsurances()
         {
             return _insurancesDto;
         }
-
         public string ErrorMessage { get; private set; }
-
         public async Task<IEnumerable<OrderDto>> GetAllOrders(int clientId, ValuteGetterService valuteGetter)
         {
             await dbContext.Orders.LoadAsync();
@@ -184,8 +167,6 @@ namespace BL
                 return inst;
             });
         }
-
-
         public async Task<IEnumerable<PlacementDto>> GetPlacements(int orderId)
         {
             await dbContext.Placements.Include(x => x.Cabin).LoadAsync();
@@ -204,7 +185,6 @@ namespace BL
                 return dto;
             });
         }
-
         public async Task<OrderDto> CancelOrder(int orderId)
         {
             await dbContext.Orders.LoadAsync();

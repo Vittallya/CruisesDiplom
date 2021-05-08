@@ -69,25 +69,42 @@
                                 </TextBlock>
 
                                     <TextBlock 
-                                    Margin="0 7"
-                                    Style="{DynamicResource TextBlock_H3}">
-                                    <Run Text="Название:"/>
-                                    <Run FontWeight="DemiBold" Text="{Binding TourDto.Name}"/>
+                                        Margin="0 7"
+                                        Style="{DynamicResource TextBlock_H3}">
+                                        <Run Text="Название:"/>
+                                        <Run FontWeight="DemiBold" Text="{Binding TourDto.Name}"/>
                                     </TextBlock>
 
                                     <TextBlock 
-                                    Margin="0 7"
-                                    Style="{DynamicResource TextBlock_H3}">
-                                    <Run Text="Общее количество пассажиров:"/>
-                                    <Run FontWeight="DemiBold" Text="{Binding PeopleCount}"/>
-                                </TextBlock>
+                                        Margin="0 7"
+                                        Style="{DynamicResource TextBlock_H3}">
+                                        <Run Text="Дата отплытия:"/>
+                                        <Run FontWeight="DemiBold" Text="{Binding TourDto.StartDate, StringFormat='dd.MM.yyyy'}"/>
+                                    </TextBlock>
 
-                                <TextBlock 
-                                    Margin="0 7"
-                                    Style="{DynamicResource TextBlock_H3}">
-                                    <Run Text="Количество детей:"/>
-                                    <Run FontWeight="DemiBold" Text="{Binding ChildCount}"/>
-                                </TextBlock>
+                                    <TextBlock 
+                                        Margin="0 7"
+                                        Style="{DynamicResource TextBlock_H3}">
+                                        <Run Text="Количество дней:"/>
+                                        <Run FontWeight="DemiBold" Text="{Binding TourDto.DaysCount, StringFormat='{}{0}'}"/>
+                                    </TextBlock>
+
+
+
+                                    <TextBlock 
+                                        Margin="0 7"
+                                        Style="{DynamicResource TextBlock_H3}">
+                                        <Run Text="Общее количество пассажиров:"/>
+                                        <Run FontWeight="DemiBold" Text="{Binding PeopleCount}"/>
+                                    </TextBlock>
+
+                                    <TextBlock 
+                                        Visibility="{Binding HasChilds}"
+                                        Margin="0 7"
+                                        Style="{DynamicResource TextBlock_H3}">
+                                        <Run Text="Количество детей:"/>
+                                        <Run FontWeight="DemiBold" Text="{Binding ChildCount}"/>
+                                    </TextBlock>
 
 
                                 <StackPanel 

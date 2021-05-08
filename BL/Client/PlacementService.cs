@@ -29,7 +29,6 @@ namespace BL
             this.allDbContext = allDbContext;
             this.map = mapperService;
         }
-
         public async Task ReloadAsync(int tourId, string defImgPath)
         {
             //Todo: вычесть из числа кают те, что занятые
@@ -60,7 +59,6 @@ namespace BL
 
             }).ToList();
         }
-
         public IEnumerable<PlacementDto> GetAllPlacements()
         {
             return _placementsDto;

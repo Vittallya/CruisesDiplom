@@ -30,6 +30,7 @@ namespace Main.ViewModels
 
         async void Init()
         {
+            orderService.Clear();
             eventBus.Subscribe<Events.DataUpdated<Tour>, ToursViewModel>(OnUpdate, false);
             await Reload();
         }

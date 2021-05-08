@@ -28,7 +28,6 @@ namespace DAL.Models
         /// Номер каюты
         /// </summary>
         /// 
-        //[Column("CabinId")]
         public int CabinId { get; set; }
         public Cabin Cabin { get; set; }
     }

@@ -34,7 +34,7 @@ namespace BL
                 dto.CostUSD = valuteGetter.GetUSDValue(x.Cost);
                 dto.CostEUR = valuteGetter.GetEuroValue(x.Cost);
                 return dto;
-            });
+            }).ToList();
         }
 
         private void ReloadDtoCollection()

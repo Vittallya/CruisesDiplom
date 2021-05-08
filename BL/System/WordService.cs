@@ -11,17 +11,7 @@ namespace BL
 {
     public class WordService
     {
-        private readonly AllDbContext dbContext;
-        private readonly MapperService mapper;
-
         public string Message { get; private set; }
-
-        public WordService(AllDbContext dbContext, MapperService mapper)
-        {
-            this.dbContext = dbContext;
-            this.mapper = mapper;
-        }
-
         public void ShowOrderContract(OrderDto orderDto, ValuteGetterService valuteGetter, string path)
         {
             Dictionary<string, string> stubs = new Dictionary<string, string>();
@@ -75,7 +65,6 @@ namespace BL
 
         }
         public const int CUT_PART = 8;
-
         private bool ShowDocument(Dictionary<string, string> stubs, string path)
         {
             var wordApp = new word.Application();
@@ -126,7 +115,6 @@ namespace BL
             }
             return true;
         }
-
         private void ReplaceWordStub(string stub, string value, word.Document document)
         {
             var range = document.Content;

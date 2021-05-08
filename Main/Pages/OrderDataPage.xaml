@@ -97,7 +97,7 @@
                         
                         <Button FontSize="14" 
                             Margin="0 25" 
-                            Content="Добавить страховку"
+                            Content="Включить страховку"
                             Command="{Binding AddIns}"
                             CommandParameter="{Binding SelectedIndex, ElementName=combo}"
                             Style="{DynamicResource LinkButton}"/>

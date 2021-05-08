@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using MVVM_Core.Validation;
 
 namespace MVVM_Core
 {
@@ -20,6 +21,7 @@ namespace MVVM_Core
             services.AddSingleton<PageService>();
             services.AddSingleton<EventBus>();
             services.AddSingleton<WindowsService>();
+            services.AddTransient<Validator>();
 
             var types = FindTypesByBaseClass("BaseViewModel");
 

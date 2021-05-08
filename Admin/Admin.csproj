@@ -111,6 +111,7 @@
     <Compile Include="Services\FieldsGenerator.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Abstract\EditItemViewModel.cs" />
+    <Compile Include="ViewModels\InsViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IEditItemViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IItemsViewModel.cs" />
     <Compile Include="ViewModels\Abstract\ItemsViewModel.cs" />

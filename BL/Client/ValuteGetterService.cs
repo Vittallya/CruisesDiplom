@@ -20,7 +20,6 @@ namespace BL
         {
             this.requestService = requestService;
         }
-
         public async Task<bool> ReloadAsync()
         {
             try
@@ -46,21 +45,17 @@ namespace BL
                 return false;
             }
         }
-
         public string Message { get; set; }
-
         public double GetValute(string valute, double value = 1)
         {
             if(valutesToRub.ContainsKey(valute))
                 return value / valutesToRub[valute];
             return 0;
         }
-
         public double GetUSDValue(double value)
         {
             return GetValute("USD", value);
         }
-
         public double GetEuroValue(double value)
         {
             return GetValute("EUR", value);

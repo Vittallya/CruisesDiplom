@@ -1,5 +1,5 @@
-﻿--USE [CruisesDbTst1]
---GO
+﻿USE [CruisesDbTst1]
+GO
 
 SET IDENTITY_INSERT [Layners] ON;
 
@@ -141,7 +141,6 @@ INSERT INTO [Cabins] ([Id], [Deck], [LaynerId], [CabinType], [AdultCount], [Chil
 		(4028, 4, 1, 2, 4, 1),
 		(4029, 4, 1, 2, 4, 2),
 		(4030, 4, 1, 2, 4, 3);
-
 
 
 SET IDENTITY_INSERT [Insurances] ON;

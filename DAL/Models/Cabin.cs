@@ -12,21 +12,14 @@ namespace DAL.Models
     {
         A, B, C, D
     }
-
     public class Cabin
     {
         public int Id { get; set; }
 
-        //[Key]
-        //[Column( Order = 2)]
         public int Deck { get; set; }
         public int LaynerId { get; set; }
         public Layner Layner { get; set; }
         public CabinType CabinType { get; set; }
-
-        /// <summary>
-        /// Палуба
-        /// </summary>
 
         public int AdultCount { get; set; }
         public int ChildCount { get; set; }

@@ -1,9 +1,13 @@
 ﻿using BL;
 using DAL.Dto;
+using DAL.Models;
+using Main.Events;
 using MVVM_Core;
+using MVVM_Core.Validation;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,6 +20,7 @@ namespace Main.ViewModels
         private readonly InsurancesService insuranceService;
         private readonly ToursService toursService;
         private readonly ValuteGetterService valuteGetter;
+        private readonly Validator validator;
         private readonly RegisterService registerService;
         private readonly EventBus eventBus;
 
@@ -42,6 +47,7 @@ namespace Main.ViewModels
             InsurancesService insuranceService,
             ToursService toursService,
             ValuteGetterService valuteGetter,
+            Validator validator,
             RegisterService registerService, EventBus eventBus) : base(pageservice)
         {
             this.orderService = orderService;
@@ -49,6 +55,7 @@ namespace Main.ViewModels
             this.insuranceService = insuranceService;
             this.toursService = toursService;
             this.valuteGetter = valuteGetter;
+            this.validator = validator;
             this.registerService = registerService;
             this.eventBus = eventBus;
             PropertyChanged += OrderDataViewModel_PropertyChanged;
@@ -76,20 +83,23 @@ namespace Main.ViewModels
             FullCostEuro = valuteGetter.GetEuroValue(FullCost);
         }
 
-        async void Init()
+        async Task ReloadInsurance()
         {
             await insuranceService.ReloadAsync(valuteGetter);
+            var allIns = insuranceService.GetInsurances();
 
             if (orderService.HasInsurances)
             {
-                UsedIns = new ObservableCollection<InsuranceDto>(orderService.GetUsedInsurances());
+                UsedIns = new ObservableCollection<InsuranceDto>(
+                   orderService.GetUsedInsurances().Where(x => allIns.Contains(x, new InsComparer())));
+
                 NotUsedIns = new ObservableCollection<InsuranceDto>(
-                    insuranceService.GetInsurances().Except(UsedIns, new InsComparer()));
+                    allIns.Except(UsedIns, new InsComparer()));
             }
             else
             {
                 UsedIns = new ObservableCollection<InsuranceDto>();
-                NotUsedIns = new ObservableCollection<InsuranceDto>(insuranceService.GetInsurances());
+                NotUsedIns = new ObservableCollection<InsuranceDto>(allIns);
             }
 
             IsInsAdditionVisible = NotUsedIns.Count > 0;
@@ -98,13 +108,44 @@ namespace Main.ViewModels
             {
                 InsuranceIndex = 0;
             }
+            orderService.SetupInsurances(UsedIns);
+        }
+
+        async void Init()
+        {
+            eventBus.Subscribe<Events.DataUpdated<Insurance>, OrderDataViewModel>(OnDbUpdated, false);
+            await ReloadInsurance();
 
             _tour = toursService.GetTour(orderService.TourId);
 
             cost = _tour.Cost;
             costChild = _tour.ChildCost;
             OrderDto = orderService.GetOrder();
+            Old = OrderDto.PeopleCount - OrderDto.ChildCount;
+            Child = OrderDto.ChildCount;
+
             IsAutorized = userService.IsAutorized;
+        }
+
+        private async Task OnDbUpdated(DataUpdated<Insurance> arg)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                try
+                {
+                    await ReloadInsurance();
+                    break;
+                }
+                catch (NotSupportedException) when(i < 3)
+                {
+                    await Task.Delay(450);
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                    break;
+                }
+            }
         }
 
         double GetCost(double cost, double costChild, int old, int child, int daysCount)
@@ -172,7 +213,6 @@ namespace Main.ViewModels
             OrderDto.ChildCount = Child;
             OrderDto.FullCost = FullCost;
             orderService.SetupFilledOrder(OrderDto);
-            orderService.SetupInsurances(UsedIns);
 
             //pageservice.ChangePage<Pages.PlacementPage>(PoolIndex, DisappearAnimation.Default);
 

@@ -77,9 +77,34 @@
     <Compile Include="ServiceProviderBuilder.cs" />
     <Compile Include="Services\PageService.cs" />
     <Compile Include="Services\WindowsService.cs" />
+    <Compile Include="ValidationOld\Base\IValidPropertyBase.cs" />
+    <Compile Include="ValidationOld\Base\IValidRule.cs" />
+    <Compile Include="ValidationOld\Base\IValueTypeValidRule.cs" />
+    <Compile Include="ValidationOld\Base\ValidRule.cs" />
+    <Compile Include="ValidationOld\LinkedType\ILinkedTypeValidRule.cs" />
+    <Compile Include="ValidationOld\LinkedType\LinkedTypeValidationRule.cs" />
+    <Compile Include="ValidationOld\StringValidRule\IStringValidRule.cs" />
+    <Compile Include="ValidationOld\StringValidRule\StringValidRule.cs" />
+    <Compile Include="ValidationOld\ValidConfig.cs" />
+    <Compile Include="ValidationOld\ValidPredicate.cs" />
+    <Compile Include="ValidationOld\ValueTypeValidRule\IValueTypeValidRule.cs" />
+    <Compile Include="ValidationOld\ValueTypeValidRule\ValueTypeValidRule.cs" />
+    <Compile Include="Validation\PredicateBranch\IPredicatesBranch.cs" />
+    <Compile Include="Validation\PredicateBranch\IPredicatesBranchCollection.cs" />
+    <Compile Include="Validation\PredicateBranch\PredicatesBranch.cs" />
+    <Compile Include="Validation\PredicateBranch\PredicatesBranchCollection.cs" />
+    <Compile Include="Validation\Validator\Validator.cs" />
+    <Compile Include="Validation\ValidRules\Base\BaseValidRule.cs" />
+    <Compile Include="Validation\ValidRules\Base\IValidRule.cs" />
+    <Compile Include="Validation\ValidRules\Base\ValidRulesExtension.cs" />
+    <Compile Include="Validation\ValidRules\ComparableValidRule.cs" />
+    <Compile Include="Validation\ValidRules\StringValidRule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Validation\ValidRules\Comparable\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

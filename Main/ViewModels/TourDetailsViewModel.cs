@@ -75,11 +75,13 @@ namespace Main.ViewModels
         void Reload()
         {
             Tour = toursService.GetTour(orderService.TourId);
-
-            CostUsd = valuteGetter.GetUSDValue(Tour.Cost);
-            CostEuro = valuteGetter.GetEuroValue(Tour.Cost);
-            CostChildUsd = valuteGetter.GetUSDValue(Tour.ChildCost);
-            CostChildEuro = valuteGetter.GetEuroValue(Tour.ChildCost);
+            if (Tour != null)
+            {
+                CostUsd = valuteGetter.GetUSDValue(Tour.Cost);
+                CostEuro = valuteGetter.GetEuroValue(Tour.Cost);
+                CostChildUsd = valuteGetter.GetUSDValue(Tour.ChildCost);
+                CostChildEuro = valuteGetter.GetEuroValue(Tour.ChildCost);
+            }
         }
 
         private async Task OnTourUpdated(DataUpdated<Tour> arg)

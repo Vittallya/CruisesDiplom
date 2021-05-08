@@ -28,6 +28,7 @@ namespace Admin.ViewModels
         {
             new Components.TableComponent{Name = "Туры", Type = typeof(ToursViewModel)},
             new Components.TableComponent{Name = "Лайнеры", Type = typeof(LaynersViewModel)},
+            new Components.TableComponent{Name = "Страховка", Type = typeof(InsViewModel)},
         };
 
         public MainViewModel(DbContextLoader loader, PageService pageService, EventBus eventBus, 
@@ -51,11 +52,13 @@ namespace Admin.ViewModels
             serverPipeHandler.Send(updatePipe.GetString());
         }
 
+        public string TableName { get; set; }
 
         public ICommand SelectTable => new Command(x =>
         {
             if(x is Components.TableComponent comp)
             {
+                TableName = comp.Name;
                 Locator.SetItemsViewModel(comp.Type);
                 pageService.ClearHistoryByPool(1);
                 pageService.ChangePage<Pages.ItemsPage>(1, DisappearAndToSlideAnim.Default);

@@ -29,5 +29,6 @@ namespace DAL.Dto
         public ICollection<PlacementDto> PlacementDtos { get; set; }
 
         public bool HasIns => InsuranceDtos != null && InsuranceDtos.Count > 0;
+        public bool HasChilds => ChildCount > 0;
     }
 }

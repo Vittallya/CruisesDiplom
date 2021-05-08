@@ -13,9 +13,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         
 
         <TextBlock
+            Grid.RowSpan="2"
             Grid.ColumnSpan="2"
             Visibility="{Binding LoadingContext, Converter={StaticResource BoolToVis}}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Загрузка бд..." RenderTransformOrigin="0.5,0.5">
             <TextBlock.Style>
@@ -55,6 +60,7 @@
 
         <ItemsControl 
                 ItemsSource="{Binding Tables}"
+                Grid.RowSpan="2"
                 Visibility="{Binding LoadingContext, Converter={StaticResource BoolToVisInvert}}"
                 Margin="25 20">
 
@@ -73,6 +79,14 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <Frame NavigationUIVisibility="Hidden" Grid.Column="1" Content="{Binding CurrentPage}"/>
+
+        <TextBlock Text="{Binding TableName, StringFormat='{}Таблица: {0}'}" 
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center"
+                   FontSize="21"/>
+
+        <Frame 
+            Grid.Row="1"
+            NavigationUIVisibility="Hidden" Grid.Column="1" Content="{Binding CurrentPage}"/>
     </Grid>
 </Window>

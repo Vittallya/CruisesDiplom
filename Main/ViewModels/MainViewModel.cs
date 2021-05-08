@@ -159,10 +159,11 @@ namespace Main.ViewModels
 
             ImagesCopy();
             await ContractCopy();
-            
+
             IsLoaded = await contextLoader.LoadAsync<Layner>();
             await sourceService.ReloadAsync();
 
+            IsLoaded = true;
             IsLoadingAnimation = false;
 
             if (IsLoaded)
