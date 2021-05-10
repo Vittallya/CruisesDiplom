@@ -86,6 +86,13 @@ namespace Main.ViewModels
             {
                 var list = lb.SelectedItems.Cast<Passenger>();
 
+                if(list.Count() == 0)
+                {
+                    MessageBox.Show("Необходимо выбрать туриста(-ов)");
+                    return;
+                }
+
+
                 if(list.All(z => !z.IsChildBefore14 ? 
                 z.Pasport != null : z.BirthDocument != null && z.FIO != null))
                 {

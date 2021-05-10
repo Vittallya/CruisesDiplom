@@ -108,7 +108,6 @@ namespace Main.ViewModels
             {
                 InsuranceIndex = 0;
             }
-            orderService.SetupInsurances(UsedIns);
         }
 
         async void Init()
@@ -134,9 +133,10 @@ namespace Main.ViewModels
                 try
                 {
                     await ReloadInsurance();
+                    orderService.SetupInsurances(UsedIns);
                     break;
                 }
-                catch (NotSupportedException) when(i < 3)
+                catch (NotSupportedException)
                 {
                     await Task.Delay(450);
                 }
@@ -213,8 +213,7 @@ namespace Main.ViewModels
             OrderDto.ChildCount = Child;
             OrderDto.FullCost = FullCost;
             orderService.SetupFilledOrder(OrderDto);
-
-            //pageservice.ChangePage<Pages.PlacementPage>(PoolIndex, DisappearAnimation.Default);
+            orderService.SetupInsurances(UsedIns);
 
             if (userService.IsAutorized)
             {
