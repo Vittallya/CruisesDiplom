@@ -5,17 +5,201 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Main.Windows"
         mc:Ignorable="d"
+        
         DataContext="{Binding Source={StaticResource Locator}, Path=CabinsViewModel}"
-        Title="Выбор каюты" Height="450" Width="800">
+        ResizeMode="NoResize"
+        Title="Выбор каюты" Height="700" Width="{Binding WindowWidth}" >
     <Grid>
-        <ScrollViewer
+        <TextBlock 
+            Visibility="{Binding IsLoaded, Converter={StaticResource BoolToVisInvert}}"
+            Text="Загрузка..." Style="{DynamicResource TextBlock_H1}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <Grid Visibility="{Binding IsLoaded, Converter={StaticResource BoolToVis}}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition  />
+            </Grid.RowDefinitions>
+
+
+            <DockPanel Margin="10 25">
+
+                <StackPanel Margin="0 0 0 0" HorizontalAlignment="Center"  DockPanel.Dock="Bottom" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center"
+                           Margin="0 0 10 0" 
+                           Style="{DynamicResource TextBlock_H2}" 
+                           Text="Палуба: "/>
+                    <Button 
+                    Command="{Binding Left}"
+                    Style="{DynamicResource ButtonEmpty}">
+                        <Path  Fill="LightBlue">
+                            <Path.Data >
+                                <PathGeometry FillRule="Nonzero">
+                                    <PathFigure StartPoint="0 15" IsFilled="True" IsClosed="True">
+
+                                        <LineSegment Point="25,0" />
+                                        <LineSegment Point="25,30" />
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                    </Button>
+                    <TextBlock Margin="10 0" Style="{DynamicResource TextBlock_H2}" 
+                           VerticalAlignment="Center" 
+                           Text="{Binding CurrentDeck}"/>
+                    <Button  
+                    Command="{Binding Right}"
+                    Style="{DynamicResource ButtonEmpty}">
+                        <Path  Fill="LightBlue">
+                            <Path.Data >
+                                <PathGeometry FillRule="Nonzero">
+                                    <PathFigure StartPoint="0 0" IsFilled="True" IsClosed="True">
+
+                                        <LineSegment Point="25,15" />
+                                        <LineSegment Point="0,30" />
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                    </Button>
+
+
+                    <!--<Button Command="{Binding SaveCoods}" 
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Content="Сохранить"/>-->
+                </StackPanel>
+                <!--<Canvas x:Name="canv">
+                <Canvas.Background>
+                    <ImageBrush 
+                    Stretch="Uniform"
+                    ImageSource="{DynamicResource d5}"/>
+
+
+
+                </Canvas.Background>
+
+            </Canvas>-->
+                <Grid>
+
+
+
+                    <ListView 
+                        SelectedItem="{Binding SelectedCabinSchema}"
+                        BorderBrush="Transparent"
+                        SelectionMode="Single"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        ItemsSource="{Binding CabinSchemas}" x:Name="canv">
+                        <ItemsControl.Background>
+                            <ImageBrush 
+                            Stretch="Uniform"
+                            ImageSource="{Binding CurrentImage}"/>
+                        </ItemsControl.Background>
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                        Background="Transparent"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+
+
+
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Canvas.Left" Value="{Binding Path=X}" />
+                                <Setter Property="Canvas.Top" Value="{Binding Path=Y}" />
+
+                                <Setter Property="IsEnabled" Value="False" />
+                                <Setter Property="Content" Value="{Binding CabinNumber}"/>
+                                <Setter Property="Width" Value="{Binding Width}"/>
+                                <Setter Property="Height" Value="{Binding Heigth}"/>
+
+
+                                <Setter Property="BorderBrush" Value="Black"/>
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListViewItem">
+
+                                            <Grid>
+                                                <Border 
+                                                    Width="{TemplateBinding Width}"
+                                                    Height="{TemplateBinding Height}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}">
+                                                    <ContentPresenter 
+                                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                        Content="{TemplateBinding Content}"/>
+                                                </Border>
+                                            </Grid>
+
+
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="BorderThickness" Value="3"/>
+                                                    <Setter Property="Background" Value="LightCoral"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+
+
+                                    <DataTrigger Binding="{Binding Cabin}" Value="0">
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding Cabin}" Value="1">
+                                        <Setter Property="Background" Value="Red"/>
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding Cabin}" Value="2">
+                                        <Setter Property="Background" Value="Yellow"/>
+                                    </DataTrigger>
+
+                                    <DataTrigger Binding="{Binding Cabin}" Value="3">
+                                        <Setter Property="Opacity" Value="0.4"/>
+                                    </DataTrigger>
+
+                                </Style.Triggers>
+
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+
+                    </ListView>
+
+
+
+                </Grid>
+
+            </DockPanel>
+
+
+            <ScrollViewer
+            Visibility="{Binding IsSelectedMode, Converter={StaticResource BoolToVisInvert}}"
+            Grid.Row="1"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <ItemsControl 
-                ItemsSource="{Binding Cabins}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border
+                <ItemsControl 
+                ItemsSource="{Binding SpecialForCabins}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border
                             Margin="55 15"
                             HorizontalAlignment="Center"
                             Background="LightSkyBlue" 
@@ -26,17 +210,17 @@
 
                                 <Grid >
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                    
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
                                     <StackPanel Grid.Column="0" HorizontalAlignment="Left">
                                         <TextBlock Style="{DynamicResource TextBlock_H2}">
                                         <Run Text="Каюта № "/>
@@ -74,7 +258,7 @@
                                         Source="{Binding ImagePath}"
                                         Width="350"/>
 
-                                <Button Content="Выбрать" 
+                                    <Button Content="Выбрать" 
                                         FontSize="16"
                                         VerticalAlignment="Top"
                                         Margin="0 10"
@@ -84,11 +268,78 @@
                                         Grid.Row="1"
                                         Padding="45 7"/>
 
-                            </Grid>
+                                </Grid>
                             </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <Border Background="LightBlue" 
+                        Visibility="{Binding IsSelectedMode, Converter={StaticResource BoolToVis}}"
+                        Padding="15 2"
+                        
+                        Width="{Binding PopupWidth}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        BorderBrush="LightBlue" BorderThickness="3 " CornerRadius="3">
+
+                <Border.RenderTransform>
+                    <TranslateTransform X="{Binding OffsetX, UpdateSourceTrigger=PropertyChanged}" 
+                                            Y="{Binding SelectedCabinSchema.Y, UpdateSourceTrigger=PropertyChanged}"/>
+                </Border.RenderTransform>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+
+
+                    <Image Height="200" 
+                       Width="400"
+                       Stretch="Fill"
+                               Grid.Row="1" 
+                               Source="{Binding SelectedCabin.ImagePath}"/>
+
+                    <Button Content="Выбрать"
+                                Padding="25 3"
+                                Margin="0 10"
+                                FontSize="16"
+                            FontWeight="DemiBold"
+                        Command="{Binding SelectCommand}"
+                                Style="{DynamicResource ButtonNext}"
+                                Grid.Row="2"/>
+
+
+
+                    <TextBlock Margin="0 5" HorizontalAlignment="Center" Style="{DynamicResource TextBlock_H2}" 
+                           VerticalAlignment="Center"
+                               Text="{Binding SelectedCabinSchema.CabinNumber, StringFormat='{}Каюта №{0}'}"/>
+                    <DockPanel >
+
+                        <Button 
+                        Command="{Binding Close}"
+                    Style="{DynamicResource ButtonEmpty}"
+                        DockPanel.Dock="Right"
+                    HorizontalAlignment="Right" VerticalAlignment="Top">
+
+                            <Grid >
+
+                                <Image Margin="-12 0 0 0" FlowDirection="RightToLeft" Height="35" Source="{DynamicResource LeftArrow}"/>
+                                <Image Margin="12 0 0 0"  Height="35" Source="{DynamicResource LeftArrow}"/>
+                            </Grid>
+                        </Button>
+
+
+                    </DockPanel>
+
+                </Grid>
+
+            </Border>
+        </Grid>
+
     </Grid>
 </Window>

@@ -110,9 +110,9 @@
     <Compile Include="Migrations\202105050906232_cabinsPlacements.designer.cs">
       <DependentUpon>202105050906232_cabinsPlacements.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202105051106313_seed.cs" />
-    <Compile Include="Migrations\202105051106313_seed.designer.cs">
-      <DependentUpon>202105051106313_seed.cs</DependentUpon>
+    <Compile Include="Migrations\202105311721501_seed.cs" />
+    <Compile Include="Migrations\202105311721501_seed.designer.cs">
+      <DependentUpon>202105311721501_seed.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Client.cs" />
@@ -171,8 +171,8 @@
     <EmbeddedResource Include="Migrations\202105050906232_cabinsPlacements.resx">
       <DependentUpon>202105050906232_cabinsPlacements.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105051106313_seed.resx">
-      <DependentUpon>202105051106313_seed.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202105311721501_seed.resx">
+      <DependentUpon>202105311721501_seed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

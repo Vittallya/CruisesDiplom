@@ -23,6 +23,7 @@ namespace Main.ViewModels
         private readonly DbContextLoader contextLoader;
         private readonly ClientPipeHanlder pipeHanlder;
         private readonly EventBus eventBus;
+        private readonly ConnectorService updaterService;
         private readonly ValuteGetterService valuteGetter;
         private readonly SplashScreenService splashScreenService;
         private readonly SourceService sourceService;
@@ -37,6 +38,7 @@ namespace Main.ViewModels
             DbContextLoader contextLoader, 
             ClientPipeHanlder pipeHanlder, 
             EventBus eventBus,
+            ConnectorService connectorService,
             ValuteGetterService valuteGetter,
             SplashScreenService splashScreenService,
             SourceService sourceService,
@@ -46,6 +48,7 @@ namespace Main.ViewModels
             this.contextLoader = contextLoader;
             this.pipeHanlder = pipeHanlder;
             this.eventBus = eventBus;
+            this.updaterService = connectorService;
             this.valuteGetter = valuteGetter;
             this.splashScreenService = splashScreenService;
             this.sourceService = sourceService;
@@ -151,8 +154,18 @@ namespace Main.ViewModels
 
         async void Init()
         {
+
             IsSplashVisible = true;
             IsLoadingAnimation = true;
+
+            var value = await updaterService.GetValue(5);
+
+            if (!updaterService.IsConnected || value)
+            {
+                ClearScreen();
+                SplashScreenService_OverlapScreen(updaterService.ErrorMessage);
+                return;
+            }
 
             pipeHanlder.Init("CruisesPipe");
             pipeHanlder.UpdateCalled += PipeHanlder_UpdateCalled;

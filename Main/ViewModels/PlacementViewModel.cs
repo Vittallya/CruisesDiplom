@@ -112,6 +112,28 @@ namespace Main.ViewModels
             }
         });
 
+        public ICommand ClearPlacement => new Command(x =>
+        {
+            if(x is ListBox lb)
+            {
+                var list = lb.SelectedItems.Cast<Passenger>().Where(p => p.IsCabinSelected);
+
+                if(list.Count() == 0)
+                {
+                    MessageBox.Show("Необходимо выбрать туриста(-ов), для которых уже выбрана каюта");
+                    return;
+                }
+
+                foreach (var p in list)
+                    p.IsCabinSelected = false;
+
+                var other = Passengers.Except(list, new PassComparer());
+
+                Passengers = new ObservableCollection<Passenger>(
+                    other.Union(list).OrderBy(a => a.Number));
+            }
+        });
+
         protected override void Back(object param)
         {
             if (userService.IsAutorized)

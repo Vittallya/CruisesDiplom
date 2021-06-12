@@ -1,6 +1,7 @@
 ﻿using BL;
 using DAL.Dto;
 using Main.Events;
+using Main.Services;
 using MVVM_Core;
 using System;
 using System.Collections.Generic;
@@ -16,14 +17,23 @@ namespace Main.ViewModels
     public class HomeViewModel : BasePageViewModel
     {
         private readonly EventBus eventBus;
+        private readonly SplashScreenService splashScreen;
+        private readonly ConnectorService updaterService;
         private readonly UserService userService;
         private readonly SourceService sourceService;
 
         Window window = App.Current.MainWindow;
 
-        public HomeViewModel(PageService pageservice, EventBus eventBus, UserService userService, SourceService sourceService) : base(pageservice)
+        public HomeViewModel(PageService pageservice,
+                             EventBus eventBus,
+                             SplashScreenService splashScreen,
+                             ConnectorService connectorService,
+                             UserService userService,
+                             SourceService sourceService) : base(pageservice)
         {
             this.eventBus = eventBus;
+            this.splashScreen = splashScreen;
+            this.updaterService = connectorService;
             this.userService = userService;
             this.sourceService = sourceService;
             Init();

@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto"
+        <ScrollViewer TextBlock.FontSize="15" VerticalScrollBarVisibility="Auto"
                 Margin="45 25" VerticalAlignment="Top" x:Name="fields"
                       HorizontalScrollBarVisibility="Disabled">
             <ContentPresenter Content="{Binding Stack}"/>
@@ -37,10 +37,11 @@
                     Orientation="Horizontal">
         
         <Button 
+            FontSize="15"
             Command="{Binding Cancel}" Margin="10 0" Padding="45 5" Content="Отмена"/>
         
         <Button 
-            
+            FontSize="16"
             Grid.Row="1"
             Command="{Binding Accept}" Margin="10 0" Padding="45 5" Content="Применить"/>
         </StackPanel>

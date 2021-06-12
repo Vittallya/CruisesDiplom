@@ -1,4 +1,4 @@
-﻿USE [CruisesDbTst1]
+﻿USE [CruisesDb]
 GO
 
 SET IDENTITY_INSERT [Layners] ON;

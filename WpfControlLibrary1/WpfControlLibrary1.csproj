@@ -119,5 +119,11 @@
   <ItemGroup>
     <None Include="seed.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\deck2.png" />
+    <Resource Include="Images\deck3.png" />
+    <Resource Include="Images\deck4.png" />
+    <Resource Include="Images\deck5.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Main.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,12 @@ namespace Main.Windows
         public CabinsWindow()
         {
             InitializeComponent();
+            Loaded += CabinsWindow_Loaded;
+        }
+
+        private void CabinsWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as CabinsViewModel).SetupWindow(this);
         }
     }
 }

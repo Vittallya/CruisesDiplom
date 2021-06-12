@@ -11,10 +11,11 @@
 
     <Grid>
         <ListView 
-            View="{Binding GridView}"            
+            View="{Binding GridView}"  
+            FontSize="14"
             ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
             <ListView.ContextMenu>
-                <ContextMenu>
+                <ContextMenu FontSize="15">
                     <MenuItem 
                                           Command="{Binding AddCommand}" 
                                           Header="Добавить новый"/>

@@ -22,7 +22,21 @@ namespace Main.Pages
     {
         public HomePage()
         {
-            InitializeComponent();
+            Init();            
         }
+
+        async void Init()
+        {
+            InitializeComponent();
+            var c = Locator.Services.GetService(typeof(BL.ConnectorService)) as BL.ConnectorService;
+
+            var res = await c.GetValue(5);
+
+            if (res)
+            {
+                App.Current.Shutdown();
+            }
+        }
+
     }
 }

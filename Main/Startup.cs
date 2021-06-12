@@ -17,6 +17,7 @@ namespace Main
         {
             services.AddTransient<AllDbContext>();
             services.AddSingleton<Services.SplashScreenService>();
+            services.AddSingleton<ConnectorService>();
             services.AddTransient<DbContextLoader>();
             services.AddTransient<LoginService>();
             services.AddTransient<MapperService>();

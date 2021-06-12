@@ -145,18 +145,41 @@
             </ListBox.ItemsPanel>
         </ListBox>
 
-        <Button 
-            x:Name="btnPlace"
-            Grid.Column="1"
-            VerticalAlignment="Top"
-            Grid.Row="2"
-            Margin="0 25"
-            FontSize="16"
-            HorizontalAlignment="Center"
-            Command="{Binding PlaceCommand}"
-            CommandParameter="{Binding ElementName=listBox}"
-            Content="Разместить" 
-            Padding="35 5" />
+
+            <StackPanel
+                Grid.Column="1"
+                VerticalAlignment="Top"
+                Grid.Row="2"
+                HorizontalAlignment="Center"
+                Margin="0 25"
+                Orientation="Horizontal">
+
+                <Button 
+                    x:Name="btnPlace"
+                    FontSize="16"
+                    Margin="10 0"
+                    HorizontalAlignment="Center"
+                    Command="{Binding PlaceCommand}"
+                    CommandParameter="{Binding ElementName=listBox}"
+                    Content="Разместить" 
+                    Padding="35 5" />
+
+
+                <Button 
+                    Margin="10 0"
+                FontSize="16"
+                HorizontalAlignment="Center"
+                Command="{Binding ClearPlacement}"
+                CommandParameter="{Binding ElementName=listBox}"
+                Content="Очистить выбор" 
+                Padding="35 5" />
+
+            </StackPanel>
+            
+            
+            
+            
+            
         <Button 
             Grid.Column="1"
             HorizontalAlignment="Left"

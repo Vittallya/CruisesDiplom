@@ -26,8 +26,13 @@ namespace Main
         public MainWindow()
         {
             InitializeComponent();
+            Init();
         }
-       
 
+        private void Init()
+        {
+
+            
+        }
     }
 }

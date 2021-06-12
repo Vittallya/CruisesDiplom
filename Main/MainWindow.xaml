@@ -93,15 +93,14 @@
 
             <TextBlock
                 Margin="0 25 0 0"
-                Visibility="{Binding IsMessageVisible, Converter={StaticResource BoolToVis}}"
-                Style="{DynamicResource TextBlock_H2}">                
-                <Run Text="{Binding Message}"/>
-            </TextBlock>
+                Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"
+                Visibility="{Binding IsMessageVisible, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}"
+                Style="{DynamicResource TextBlock_H2}"/>
 
             <TextBlock
                 Margin="0 10"
                 Visibility="{Binding IsMessageVisible, Converter={StaticResource BoolToVis}}"
-                Style="{DynamicResource TextBlock_H3}" Text="{Binding MessageDetail}"/>
+                Style="{DynamicResource TextBlock_H3}" Text="{Binding MessageDetail, UpdateSourceTrigger=PropertyChanged}"/>
             
             <Button
                 Margin="0 10"
@@ -109,7 +108,7 @@
                 FontSize="16"
                 Padding="55 7"
                 HorizontalAlignment="Center"
-                Visibility="{Binding IsButtonVisible, Converter={StaticResource BoolToVis}}"
+                Visibility="{Binding IsButtonVisible, Converter={StaticResource BoolToVis}, UpdateSourceTrigger=PropertyChanged}"
                 Content="Ок"/>
         </StackPanel>
     </Grid>

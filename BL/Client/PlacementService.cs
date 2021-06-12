@@ -23,7 +23,7 @@ namespace BL
 
         private IEnumerable<PlacementDto> _placementsDto;
         private IEnumerable<CabinDto> _cabinsDto;
-
+        private List<int> _busyCabins;
         public PlacementService(AllDbContext allDbContext, MapperService mapperService)
         {
             this.allDbContext = allDbContext;
@@ -42,11 +42,12 @@ namespace BL
 
             _cabins = await allDbContext.Cabins.AsNoTracking().ToListAsync();
 
-
+            _busyCabins = new List<int>();
 
             _placementsDto = _placements.Select(x => 
             {
                 var dto = map.MapTo<Placement, PlacementDto>(x);
+                _busyCabins.Add(x.CabinId);
                 return dto;
             }).ToList();
 
@@ -63,16 +64,24 @@ namespace BL
         {
             return _placementsDto;
         }
-        public IEnumerable<CabinDto> GetCabins(int laynerId, int asults, int childs)
+        public IEnumerable<CabinDto> GetSpecialCabins(int laynerId, int asults, int childs)
         {
-            var busyCabins = _placementsDto.Select(x => x.CabinId);
-
             return _cabinsDto.
                 Where(x => 
                 //x.LaynerId == laynerId && 
                 x.AdultCount == asults && 
-                !busyCabins.Contains(x.Id) &&
+                !_busyCabins.Contains(x.Id) &&
                 x.ChildCount == childs);
+        }
+
+        public List<int> GetBusyCabins()
+        {
+            return _busyCabins;
+        }
+
+        public IEnumerable<CabinDto> GetAllCabins()
+        {
+            return _cabinsDto;
         }
     }
 }

@@ -19,6 +19,11 @@
     <BitmapImage x:Key="c2.jpg" UriSource="Images/c2.jpg"/>
     <BitmapImage x:Key="c3.jpg" UriSource="Images/c3.jpg"/>
     <BitmapImage x:Key="c4.jpg" UriSource="Images/c4.jpg"/>
+    
+    <BitmapImage x:Key="d2" UriSource="Images/deck2.png"/>
+    <BitmapImage x:Key="d3" UriSource="Images/deck3.png"/>
+    <BitmapImage x:Key="d4" UriSource="Images/deck4.png"/>
+    <BitmapImage x:Key="d5" UriSource="Images/deck5.png"/>
         
     
 

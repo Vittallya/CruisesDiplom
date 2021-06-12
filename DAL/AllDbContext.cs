@@ -10,7 +10,7 @@ namespace DAL
     {        
 
 
-        public AllDbContext():base("CruisesDb")
+        public AllDbContext():base(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CruisesDb;Integrated Security=True")
         {
             
         }

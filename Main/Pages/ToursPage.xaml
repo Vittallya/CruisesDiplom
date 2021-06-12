@@ -50,7 +50,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border
-                        Margin="25" 
+                        Margin="50" 
                         x:Name="bd"
                         BorderThickness="1" >
                         <StackPanel Orientation="Vertical">
@@ -60,11 +60,38 @@
                                 MaxHeight="150"
                             Source="{Binding ImagePath}"/>
 
-                            <TextBlock Margin="0 7" Style="{DynamicResource TextBlock_H3}" Text="{Binding Name}"/>
-                            <TextBlock Style="{DynamicResource TextBlock_H3_DemiBold}"
-                                   FontStyle="Italic"
-                                       Margin="0 7"
-                                   Text="{Binding Cost, StringFormat=\{0:N\} р.}"/>
+                                <TextBlock Margin="0 7"
+                                           FontSize="18"
+                                           Style="{DynamicResource TextBlock_H3}" Text="{Binding Name}"/>
+
+                                <TextBlock Margin="0 4" Style="{DynamicResource TextBlock_H3}">
+                                    <Run Text="Дата отплытия: "/>
+                                    <Run 
+                                           FontStyle="Italic"
+                                           FontWeight="DemiBold"
+                                            Text="{Binding StartDate, StringFormat='dd.MM.yyyy'}"/>
+                                    <Run 
+                                           FontStyle="Italic"
+                                           FontWeight="DemiBold"
+                                        Text="{Binding DaysCount, StringFormat='{}({0})'}"/>
+                                </TextBlock>
+                            
+                                <TextBlock Margin="0 4" Style="{DynamicResource TextBlock_H3}" >
+                                    
+                                    <Run Text="Место отплытия: "/>
+                                    <Run Text="{Binding StartPlace}"
+                                           FontStyle="Italic"
+                                           FontWeight="DemiBold"/>
+                                </TextBlock>
+                            
+                                <TextBlock Margin="0 4" Style="{DynamicResource TextBlock_H3}" >
+                                    
+                                    <Run Text="Стоимость: "/>
+                                    <Run Text="{Binding Cost, StringFormat=\{0:N\} р.}"
+                                           FontStyle="Italic"
+                                           FontWeight="DemiBold"/>
+                                </TextBlock>
+                            
 
                             <Button 
                                 FontSize="16"
